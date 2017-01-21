@@ -67,16 +67,7 @@ router.get('/', function(req,res) {
 		if(err) {
 			res.status(400).send(err);
 		} else {
-			res.format({
-				html: function() {
-					res.render('newindex.ejs', {
-						"users": users 
-					});
-				},
-				json: function(){
-					res.json(users);
-				}
-			});
+			res.status(200).json(users);
 		}
 	});
 });
