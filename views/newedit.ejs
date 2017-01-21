@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<form action="/user/<%= user._id%>/edit" method="post" name="updateuser">
+	<table>
+		<tr>
+			<th>firstName</th>
+			<td><input type="text" name="firstName" value="<%= user.firstName%>"></td>
+		</tr>
+		<tr>
+			<th>lastName</th>
+			<td><input type="text" name="lastName" value="<%= user.lastName%>"></td>
+		</tr>
+		<tr>
+			<th>Email</th>
+			<td><input type="text" name="Email" value="<%= user.Email%>"></td>
+		</tr>
+		<tr>
+			<th>DOB</th>	
+			<td><input type="date" name="DOB" value="<%= user.DOB%>"></td>
+		</tr>
+		<tr>
+			<th>gender</th>
+			<td><input type="radio" name="gender" value="<%= user.gender%>" >Male
+  					<input type="radio" name="gender" value="<%= user.gender%>" > Female
+  					<input type="radio" name="gender" value="<%= user.gender%>" > Other</td>
+		</tr>
+		<tr>
+			<td>
+			<button>
+				<input type="hidden" name="_method" value="PUT">update</button>
+			</td>
+		</tr>
+	</table>
+
+</form>
+</body>
+</html>

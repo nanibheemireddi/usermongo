@@ -1,0 +1,17 @@
+extends ./layout
+
+block content
+	h2.
+		User ID #{user._id}
+	form(action='/user/#{user._id}/edit',method='post',name='updateuser')
+		p firstName:
+			input#inputfirstName(type="text",value='#{user.firstName}', name='firstName')
+		p lastName:
+			input#inputlastName(type='text',value='#{user.lastName}',name='lastName')
+		p age:
+			input#inputage(type='number',value='#{user.age}',name='age')
+		p
+			input(type='hidden',value='PUT',name='_method')
+		p
+			button#btnSubmit(type='submit').
+				update

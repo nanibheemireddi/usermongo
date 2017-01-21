@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<h2>All Users</h2>
+<h3><a href="/user/new">Add newuser</a></h3>
+<ul>
+	<% for(var i = 0; i < users.length; i++) {%>
+	<li>
+		<%= users[i].id %>&nbsp;&nbsp;&nbsp;&nbsp;
+		<%= users[i].firstName %>&nbsp;&nbsp;&nbsp;&nbsp;
+		<%= users[i].lastName %>&nbsp;&nbsp;&nbsp;&nbsp;
+		<%= users[i].Email %>&nbsp;&nbsp;&nbsp;&nbsp;
+		<%= users[i].DOB %>&nbsp;&nbsp;&nbsp;&nbsp;
+		<%= users[i].gender %>&nbsp;&nbsp;&nbsp;&nbsp;
+		<%= users[i].age %>&nbsp;&nbsp;&nbsp;&nbsp;<br><br><br>
+		<form action="/user/<%= users[i]._id%> " method="post">
+		<button type="submit">
+		<input type="hidden" name="_method" value="DELETE">DELETE</button><br><br>
+		<a href = '/user/<%= users[i]._id%>/edit' >EDIT</a><br><br>
+		<a href="/user/<%= users[i]._id %>">SHOW</a><br><br>
+
+
+		</form>
+	</li>
+
+
+	<% } %>
+
+</ul>
+
+
+</body>
+</html>

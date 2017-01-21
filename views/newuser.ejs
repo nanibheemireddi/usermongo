@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		
+		<form name='Adduser' method="post" action="/user" style="height: 200px;width: 500px;">
+		<table align="center">
+		<caption><u>Add newuser</u></caption>
+			<tr>
+			<th>firstName</th>
+			<td>:<input type="text" name="firstName" placeholder="ex.nani"></td></tr>
+			<tr>
+			<th>lastName</th>
+			<td>:<input type="text" name="lastName" placeholder='ex.bheemireddi'></td></tr>
+			<tr>
+			<th>Email</th>
+			<td>:<input type="text" name="Email" placeholder="ex.hiii@gmail.com"></td></tr>
+			<tr>
+			<th>DOB</th>
+			<td>:<input type="date" name="DOB" placeholder="10/08/1994"></td></tr>
+			<th>gender</th> 
+					<td>:<input type="radio" name="gender" value="male" > Male
+  					<input type="radio" name="gender" value="female"> Female
+  					<input type="radio" name="gender" value="other"> Other</td></tr>
+  			<tr>
+  			<th>age</th>
+  			<td>:<input type="number" name="age" placeholder="ex.22"></td>
+			<tr><th colspan="2"><input type="submit" name="submit" value="submit" formaction="/user" formmethod="post"></th></tr>
+		</table>
+		</form>
+		
+	</body>
+
+</html>

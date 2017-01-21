@@ -1,0 +1,8 @@
+extends ./layout
+
+block content
+	h2.
+		userInfo #{user._id}
+	p firstName: #{user.firstName}
+	p lastName: #{user.lastName}
+	p age: #{user.age}
