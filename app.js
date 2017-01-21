@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+var PORT = 4300;
 //app.use('/', routes);
 app.use('/user', users);
 
@@ -57,6 +57,7 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
-
+app.listen(PORT, function() {
+    console.log('server started on port ' + PORT);
+});
 module.exports = app;
