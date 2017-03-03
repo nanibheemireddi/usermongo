@@ -30,6 +30,6 @@ var personschema = new mongoose.Schema({
 	age: {
 		type:Number,
 		required:[true, 'age is required']
-	}
+	},
 });
 mongoose.model('user',personschema);

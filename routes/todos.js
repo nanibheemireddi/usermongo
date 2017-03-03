@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var methodOverride = require('method-override');//used to manipulate the post
 var _ = require('underscore');
-var db = require('../db.js');
-
-router.use(bodyParser.json());
-
+//var db = require('../model/db.js');
 
 
 /* GET home page. */
@@ -16,49 +15,33 @@ router.get('/', function(req, res) {
 
 
 router.get('/todos', function(req, res) {
-
-	console.log("Hey nani in get")
-
- 	var query = req.query;
- 	var where = {};
-
-
- 	if (query.hasOwnProperty("completed")) {
- 		if (query.completed === "true") {
- 						where.completed = true;
- 	
- 		} else if (query.completed === "false") {
- 		 		where.completed = false;
- 		 	}
- 	}
-
-	if (query.hasOwnProperty("desc") && query.desc.length > 0) {
-		where.description = {
-			$like: '%' + query.desc + '%'
-		};
-	}
-	db.todo.findAll({where: where}).then(function (todos) {
-		//res.json(todos);
-		console.log("Before Render");
-		console.log(todos);
-		console.log("Before Render");
-
-		res.render('todo', { todo: todos });
-		
-	},function() {
-		res.status(500).json('{error: error in server connection}');
-	});
-
+	mongoose.model('todo').find({})
+	.populate('user',{firstName:1,lastName:1})
+	.exec(function(err,user){
+		if(err){
+			res.json(err)
+		} else {
+			res.json(user);
+		}
+	})
 });
 
 
 router.post('/todos', function(req, res) {
 
-	var body = _.pick(req.body, "description", "completed");
-	db.todo.create(body).then(function (todo) {
-		res.json(todo.toJSON());
-	}, function(e) {
-		res.status(400).send(e);
+	var description = req.body.description;
+	var completed = req.body.completed;
+	var user = req.body.user
+	mongoose.model('todo').create({
+		description: description,
+		completed: completed,
+		user:user
+	}, function(err, todo) {
+		if(err) {
+			res.status(400).send(err);
+		} else {
+			res.json(todo.toJSON());
+		}
 	});
 });
 

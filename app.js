@@ -7,9 +7,11 @@ var bodyParser = require('body-parser');
 
 var db = require('./model/db.js');
 var user = require('./model/user.js');
+var todo = require('./model/todo.js');
 
 //var routes = require('./routes/index');
 var users = require('./routes/users.js');
+var todos = require('./routes/todos.js');
 
 var app = express();
 
@@ -23,9 +25,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-var PORT = 4300;
+var PORT = 4301;
 //app.use('/', routes);
 app.use('/user', users);
+app.use('/',todos);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

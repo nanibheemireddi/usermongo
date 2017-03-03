@@ -1,17 +1,17 @@
-module.exports = function(sequelize, dataTypes){
+var mongoose = require('mongoose');
+var todoSchema = new mongoose.Schema({
+	description: {
+		type: String,
+		required: [true, 'firstName is required']
+	}, 
+	completed: {
+		type: String,
+		required: [true, 'lastName is required']
+	},
+	user : {
+		type: mongoose.Schema.Types.ObjectId, ref: 'user' 
+	}
 
-	return sequelize.define('todo', {
-		description: {
-			type: dataTypes.STRING,
-			allowNull: false,
-			validate: {
-				len: [1, 250]
-			}
-		},
-		completed: {
-			type: dataTypes.BOOLEAN,
-			allowNull: false,
-			defaultValue: true		
-		}
-	});
-}
+	
+});
+mongoose.model('todo',todoSchema);

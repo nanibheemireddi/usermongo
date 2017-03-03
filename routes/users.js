@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');//used to manipulate the post
 var _ = require('underscore');
-//var db = require('../db.js');
+//var db = require('../model/db.js');
 
 
 router.use(bodyParser.urlencoded({ extended: true }))
@@ -30,7 +30,7 @@ router.post('/', function(req, res) {
 	var lastName = req.body.lastName;
 	var email = req.body.Email;
 	var dob = req.body.DOB;
-	var gender = req.body.gender
+	var gender = req.body.gender;
 	var age = req.body.age;
 
 	//var body = _.pick(req.body, 'firstName', 'lastName', 'age');
@@ -63,13 +63,22 @@ router.post('/', function(req, res) {
 });
 
 router.get('/', function(req,res) {
-	mongoose.model('user').find({}, function(err, users) {
-		if(err) {
-			res.status(400).send(err);
-		} else {
-			res.status(200).json(users);
+	mongoose.model('user').aggregate([
+		{
+			$lookup:{
+				from: "todos",
+				localField: "_id",
+				foreignField: "user",
+				as: "todos"
+			}
 		}
-	});
+	]).exec(function(err,user){
+		if(err) {
+			res.json(err);
+		} else {
+			res.json(user);
+		}	
+	})
 });
 
 
